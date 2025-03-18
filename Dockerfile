@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# Installer les dépendances nécessaires (comme curl, git, unzip)
+# Installer les dépendances nécessaires
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
@@ -35,5 +35,5 @@ RUN composer install --no-dev --optimize-autoloader
 # Exposer le port 8000 pour Laravel
 EXPOSE 8000
 
-# Lancer Laravel avec un script de démarrage qui attend que MySQL soit prêt et exécute les migrations
-CMD ["sh", "-c", "until mysql -h db -u root -ppassword -e 'select 1'; do echo 'Waiting for MySQL...'; sleep 2; done; php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=8000"]
+# Lancer Laravel avec un script qui attend que MySQL soit prêt avant d'exécuter les migrations
+CMD ["sh", "-c", "sleep 10 && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
