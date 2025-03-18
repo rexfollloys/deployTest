@@ -1,0 +1,29 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  margin: 30px;
+}
+
+h1{
+  font-family: Candara, sans-serif;
+  color: whitesmoke;
+  text-shadow: 2px 2px 4px #333333;
+}
+
+table{
+  justify-content: center;
+  padding: 50px;
+  background-color: whitesmoke;
+  border-radius: 30px;
+  box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
+}
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}

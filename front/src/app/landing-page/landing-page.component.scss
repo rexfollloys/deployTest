@@ -1,0 +1,93 @@
+.flex-container {
+  display: flex;
+  gap: 10px; /* Espace entre le tableau et la carte */
+  padding: 30px; /* Espace autour du conteneur */
+  box-sizing: border-box;
+}
+
+.maDiv {
+  flex: 0 0 40%; /* Occupe 40% de l'espace */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.map-container {
+  flex: 1; /* Prend le reste de l'espace */
+  position: relative;
+  height: 100%; /* Assurez-vous que le conteneur de la carte prend toute la hauteur disponible */
+  border-radius: 30px; /* Ajoute des coins arrondis si nécessaire */
+  overflow: hidden; /* Cache tout débordement pour les coins arrondis */
+}
+
+
+.tableau {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  border: 2px solid midnightblue;
+  font-family: "Candara", sans-serif;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: 12rem;
+  text-align: left;
+  margin-left: 30px;
+  margin-top: 60px;
+  font-family: "Candara", sans-serif;
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 80px;
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 80px;
+    margin-left: 0;
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
+//carousel
+h2{
+  color: whitesmoke;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 160px;
+  font-family: 'Candara', sans-serif;
+}
+
+
+button{
+  font-size: 25px; /* Increase font size */
+  padding: 24px 50px; /* Increase padding */
+  border-radius : 25px; /* Rounded corners */
+  cursor: pointer; /* Cursor on hover */
+  margin-right: 10px;
+}
+thead tr{
+  background-color: midnightblue;
+  color:#fff;
+  text-align: left;
+
+}
+
+th, td{
+  padding: 15px 20px;
+}
+
+tbody tr, td, th{
+  border: 1px solid #ddd;
+
+}
+
+tbody tr:nth-child(even){
+  background-color: #f3f3f3;
+}
+
+tbody tr:nth-child(odd){
+  background-color: #fff;
+}

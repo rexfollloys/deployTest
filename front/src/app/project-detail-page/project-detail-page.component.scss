@@ -1,0 +1,150 @@
+.container {
+  display: flex;
+  font-family: "Candara", sans-serif;
+  font-size: 1.2rem;
+}
+
+.project-card {
+  display: flex;
+  width: 100%;
+  border-radius: 15px;
+  //background-color: whitesmoke;
+}
+
+mat-card-header{
+  width: 90vw;
+  min-height: 9vh;
+}
+
+mat-card-title {
+  border-radius: 15px;
+  min-height: 9vh;
+  min-width: 40vw;
+  display: flex;
+  align-items: center; /* Centre verticalement les éléments enfants */
+}
+
+mat-card-title a {
+  font-size: 5vh;
+  padding: 10px;
+  margin-left: 20px;
+  color:white;
+}
+
+.company_actions{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+mat-card-actions a {
+  color: white;
+  border-radius: 25px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  &.update{
+    background-color: #1a237e;
+  }
+
+  &.close{
+    background-color: green;
+  }
+
+  &.delete{
+    background-color: red;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: translateY(-2px);
+  }
+}
+
+mat-card-content{
+  border-radius: 15px;
+  display: flex;
+  width: 30%;
+  margin: 24px 0;
+  color: #4a4a4a;
+
+  p {
+    margin: 16px 0;
+    line-height: 1.8;
+
+    strong {
+      color: #2c2c2c;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+  }
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  height: 70vh;
+}
+
+.details{
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+}
+
+.location{
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+}
+
+.status{
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  background-color: whitesmoke;
+}
+
+.map-container {
+  margin: 20px;
+  width: 90%;
+  height: 60%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.address{
+  background-color: whitesmoke;
+  height: 30%;
+  width: 90%;
+  display:flex;
+  flex-direction: column;
+}
+
+button {
+  padding: 12px 24px;
+  letter-spacing: 0.5px;
+  border-radius: 25px;
+  margin: 10px 10px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &[color="primary"] {
+    color: white;
+    background-color: #1a237e;
+  }
+  &[color="access"] {
+    background-color: green ;
+    color: white;
+
+  }
+}

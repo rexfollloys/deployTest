@@ -1,0 +1,66 @@
+<div class="container">
+  <h1>Publier un projet</h1>
+  <form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Nom de votre projet:</mat-label>
+      <input matInput placeholder="Entrez le nom du projet" name="name" [(ngModel)]="project.name" required>
+      @if(projectForm.submitted && projectForm.controls['name']?.errors?.['required']){
+        <mat-error >
+         Un nom est nécessaire
+        </mat-error>
+      }
+    </mat-form-field>
+
+   <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Description de votre projet:</mat-label>
+      <textarea matInput placeholder="Entrez la description" name="description" [(ngModel)]="project.description" required></textarea>
+      @if(projectForm.submitted && projectForm.controls['description']?.errors?.['required']){
+        <mat-error >
+          Description is required
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Entreprise</mat-label>
+      <mat-select name="entreprise_id" [(ngModel)]="project.entreprise_id" required>
+        @for (entreprise of entreprises; track entreprise.id) {
+          <mat-option [value]="entreprise.id">
+            {{ entreprise.nom }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error *ngIf="projectForm.submitted && projectForm.controls['entreprise_id']?.errors?.['required']">
+        Veuillez choisir une entreprise
+      </mat-error>
+    </mat-form-field>
+
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+    <div class="location-fields">
+      <mat-form-field appearance="fill">
+        <mat-label>Ville</mat-label>
+        <input matInput [value]="project.city" readonly>
+        @if(projectForm.submitted && projectForm.controls['city']?.errors?.['required']){
+          <mat-error >
+            Veuillez choisir une localisation sur la carte
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Département</mat-label>
+        <input matInput [value]="project.department" readonly>
+        @if(projectForm.submitted && projectForm.controls['department']?.errors?.['required']){
+          <mat-error >
+            Veuillez choisir une localisation sur la carte
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions style="justify-content: flex-end;">
+      <button mat-button type="submit" [disabled]="!projectForm.valid">Créér Projet</button>
+    </div>
+  </form>
+</div>

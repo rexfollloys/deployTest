@@ -1,0 +1,40 @@
+
+//app style
+.wall{
+  background: linear-gradient(135deg, #0e155f, #3e7ad3e0);
+  position: relative;
+  padding: 10px; /* Ajustez cette valeur selon vos besoins */
+}
+
+.card{
+  border-radius: 15px; /* Ajustez cette valeur pour plus ou moins d'arrondi */
+  overflow: hidden;
+  margin: 30px;
+  padding: 10px; /* Ajustez cette valeur selon vos besoins */
+  position: relative;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(255, 0, 0);
+  color: white;
+  text-align: center;
+}
+.content{
+  display:flex;
+  flex:1;
+  margin-top: 50px;
+  position: relative;
+  background-position: center
+}
+
+//navbar style
+
+//sidenav style
+.side-panel{
+  background-color: #1a237e;
+}
+
+//
