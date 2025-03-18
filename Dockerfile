@@ -1,12 +1,6 @@
 # Utiliser une image PHP officielle avec FPM (version 8.2)
 FROM php:8.2-fpm
 
-# Ajouter un utilisateur non-root
-RUN useradd -m -s /bin/bash laraveluser
-
-# Passer à l'utilisateur non-root
-USER laraveluser
-
 # Installer les dépendances nécessaires (comme curl, git, unzip)
 RUN apt-get update && apt-get install -y \
     unzip \
