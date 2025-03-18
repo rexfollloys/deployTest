@@ -1,5 +1,6 @@
 # Utiliser une image PHP officielle avec FPM (version 8.2)
 FROM php:8.2-fpm
+
 # Installer les dépendances nécessaires (comme curl, git, unzip)
 RUN apt-get update && apt-get install -y \
     unzip \
@@ -31,6 +32,9 @@ RUN ls -la /app/back
 
 # Installer les dépendances via Composer
 RUN composer install --no-dev --optimize-autoloader
+
+# Effectuer la migration et le seeding de la base de données
+RUN php artisan migrate --seed --force
 
 # Exposer le port 8000 pour Laravel
 EXPOSE 8000
