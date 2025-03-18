@@ -1,4 +1,3 @@
-# Utiliser une image PHP officielle avec FPM (version 8.2)
 FROM php:8.2-fpm
 
 # Installer les dépendances nécessaires (comme curl, git, unzip)
@@ -18,6 +17,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Copier wait-for-it.sh dans le conteneur
+COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
+RUN chmod +x /usr/local/bin/wait-for-it.sh
+
 # Définir le répertoire de travail dans le dossier back (adapte si nécessaire)
 WORKDIR /app/back
 
@@ -33,8 +36,8 @@ RUN ls -la /app/back
 # Installer les dépendances via Composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Effectuer la migration et le seeding de la base de données
-RUN php artisan migrate --seed --force
+# Effectuer la migration et le seeding de la base de données, en attendant que MySQL soit prêt
+RUN /usr/local/bin/wait-for-it.sh db:3306 -- php artisan migrate --seed --force
 
 # Exposer le port 8000 pour Laravel
 EXPOSE 8000
