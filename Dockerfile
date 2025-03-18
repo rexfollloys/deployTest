@@ -17,7 +17,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Définir le répertoire de travail dans le dossier back (adapte si nécessaire)
+# Définir le répertoire de travail dans le dossier back
 WORKDIR /app/back
 
 # Copier les fichiers composer.json et composer.lock pour installer les dépendances
@@ -32,11 +32,8 @@ RUN ls -la /app/back
 # Installer les dépendances via Composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Effectuer la migration et le seeding de la base de données, en attendant que MySQL soit prêt
-RUN php artisan migrate --seed --force
-
 # Exposer le port 8000 pour Laravel
 EXPOSE 8000
 
-# Lancer Laravel avec le serveur intégré
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Lancer Laravel avec un script de démarrage qui attend que MySQL soit prêt et exécute les migrations
+CMD ["sh", "-c", "until mysql -h db -u root -ppassword -e 'select 1'; do echo 'Waiting for MySQL...'; sleep 2; done; php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=8000"]
