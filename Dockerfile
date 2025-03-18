@@ -1,6 +1,5 @@
 # Utiliser une image PHP officielle avec FPM (version 8.2)
 FROM php:8.2-fpm
-
 # Installer les dépendances nécessaires (comme curl, git, unzip)
 RUN apt-get update && apt-get install -y \
     unzip \
@@ -24,11 +23,14 @@ WORKDIR /app/back
 # Copier les fichiers composer.json et composer.lock pour installer les dépendances
 COPY ./back/composer.json ./back/composer.lock ./
 
+# Copier tous les fichiers de l'application avant d'exécuter composer install
+COPY ./back /app/back
+
+# Vérifier que le fichier artisan est présent
+RUN ls -la /app/back
+
 # Installer les dépendances via Composer
 RUN composer install --no-dev --optimize-autoloader
-
-# Copier le reste de l'application après l'installation des dépendances
-COPY ./back /app/back
 
 # Exposer le port 8000 pour Laravel
 EXPOSE 8000
