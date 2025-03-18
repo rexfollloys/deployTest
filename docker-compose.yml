@@ -4,7 +4,7 @@ services:
     build: .
     container_name: laravel-app
     ports:
-      - "9000:9000"
+      - "8000:8000"
     volumes:
       - ./back:/app/back
     networks:
