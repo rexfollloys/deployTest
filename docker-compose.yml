@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: laravel-app
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./back:/app/back
+    networks:
+      - app-network
+
+  # Optionnel: Service MySQL (si tu utilises une base de données MySQL)
+  db:
+    image: mysql:5.7
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
