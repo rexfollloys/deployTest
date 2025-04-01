@@ -1,41 +1,38 @@
 version: '3.8'
 
 services:
-  # Service PHP avec FPM pour Laravel
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel-app
+    build: .
+    container_name: laravel_app
+    restart: always
+    working_dir: /app/back
+    volumes:
+      - .:/app/back
     ports:
       - "8000:8000"
-    volumes:
-      - ./back:/app/back
     depends_on:
-      - db
-    networks:
-      - app-network
+      - mysql
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: root
+      DB_PASSWORD: password
 
-  # Service MySQL
-  db:
-    image: mysql:5.7
-    container_name: mysql-db
+  mysql:
+    image: mysql:latest
+    container_name: mysql_db
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: laravel
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
-    volumes:
-      - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+    volumes:
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  mysql-data:
-    driver: local
+  mysql_data:
