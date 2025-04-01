@@ -19,20 +19,17 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Définir le répertoire de travail
 WORKDIR /app/back
 
-# Copier uniquement les fichiers nécessaires pour installer les dépendances
-COPY ./back/composer.json ./back/composer.lock ./
-
-# Installer les dépendances via Composer
-RUN composer install --no-dev --optimize-autoloader
-
-# Copier le reste des fichiers du projet
+# 🔹 Copier tout le projet Laravel avant d'exécuter composer install
 COPY ./back /app/back
 
-# Vérifier que le fichier artisan est présent
+# 🔹 Vérifier que le fichier artisan est bien présent
 RUN ls -la /app/back
+
+# 🔹 Installer les dépendances via Composer
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Exposer le port 8000 pour Laravel
 EXPOSE 8000
 
 # Démarrer Laravel après avoir exécuté les migrations
-CMD ["sh", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
+CMD ["sh", "-c", "php artisan migrate --seed && php artisan serve --host=0.0.0.0 --port=8000"]
